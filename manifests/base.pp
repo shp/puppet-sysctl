@@ -4,6 +4,7 @@
 #
 class sysctl::base (
   $purge              = false,
+  $ignore_conf_files  = undef,
   $values             = undef,
   $hiera_merge_values = false,
   $symlink99          = $::sysctl::params::symlink99,
@@ -38,6 +39,7 @@ class sysctl::base (
       # Magic hidden here
       purge   => $purge,
       recurse => $recurse,
+      ignore  => $ignore_conf_files,
     }
     if $symlink99 and $sysctl_dir_path =~ /^\/etc\/[^\/]+$/ {
       file { "${sysctl_dir_path}/99-sysctl.conf":
